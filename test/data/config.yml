@@ -1,0 +1,6 @@
+javascripts:
+  all:
+    - 'one,two,three'
+stylesheets:
+  all:
+    - 'one,two,three'
