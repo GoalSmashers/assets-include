@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var argv = require('optimist').argv,
+  util = require('util'),
+  AssetsInclude = require('../index');
+
+var options = {
+  bundled: argv.b || argv.bundled,
+  inline: argv.i || argv.inline,
+  root: argv.r || argv.root
+};
+
+if (argv.h) {
+  util.print("usage: assetsinc [-i/--inline] [-b/--bundled] -r/--root <assets root path> <group path, name, and type>\n");
+  util.print("e.g.: assetsinc -b -r /apps/example.com/current/public javascripts/all.js\n");
+  process.exit(0);
+}
