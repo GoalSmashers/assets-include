@@ -4,14 +4,19 @@ var argv = require('optimist').argv,
   util = require('util'),
   AssetsInclude = require('../index');
 
-var options = {
-  bundled: argv.b || argv.bundled,
-  inline: argv.i || argv.inline,
-  root: argv.r || argv.root
-};
+var configFile = argv.c,
+  inline = argv.i,
+  includerOptions = {
+    bundled: argv.b,
+    root: argv.r
+  },
+  locator = argv._[0];
 
-if (argv.h) {
-  util.print("usage: assetsinc [-i/--inline] [-b/--bundled] -r/--root <assets root path> <group path, name, and type>\n");
-  util.print("e.g.: assetsinc -b -r /apps/example.com/current/public javascripts/all.js\n");
+if (argv.h || argv._.length == 0) {
+  util.print("usage: assetsinc [-i] [-b] -c <config file> -r <assets root path> <group path, name, and type>\n");
+  util.print("e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js\n");
   process.exit(0);
 }
+
+var includer = new AssetsInclude(configFile, includerOptions);
+util.print(includer[inline ? 'inline' : 'group'](locator));
