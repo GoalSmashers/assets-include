@@ -28,8 +28,8 @@ exports.groupSuite = vows.describe('group').addBatch({
     }
   }, 'css'),
   'stylesheets group': {
-    'in dev mode (as CSS)': includeContext({
-      'should give list of styles': function(include) {
+    'in plain (dev) mode as CSS': includeContext({
+      'should give a list of link tags': function(include) {
         var asFragment = include.group('stylesheets/all');
         assert(/\/stylesheets\/one.css\?\d+/.test(asFragment), 'missing one.css');
         assert(/\/stylesheets\/two.css\?\d+/.test(asFragment), 'missing two.css');
@@ -37,26 +37,26 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert.equal(asFragment.match(/link/g).length, 3);
       }
     }, 'css'),
-    'in prod mode (as CSS)': includeContext({
-      'should give list of styles': function(include) {
-        var asFragment = include.group('stylesheets/all');
-        assert(/\/stylesheets\/bundled\/all.css\?\d+/.test(asFragment), 'missing all.css');
-        assert.equal(asFragment.match(/<link/g).length, 1);
-      }
-    }, 'css', true),
-    'in dev mode (as LESS)': includeContext({
-      'should give list of styles': function(include) {
+    'in plain (dev) mode as LESS': includeContext({
+      'should give a list of link tags': function(include) {
         var asFragment = include.group('stylesheets/all');
         assert(/\/stylesheets\/one.less\?\d+/.test(asFragment), 'missing one.less');
         assert(/\/stylesheets\/two.less\?\d+/.test(asFragment), 'missing two.less');
         assert(/\/stylesheets\/three.less\?\d+/.test(asFragment), 'missing three.less');
         assert.equal(asFragment.match(/<link/g).length, 3);
       }
-    }, 'less')
+    }, 'less'),
+    'in bundled (prod) mode as CSS': includeContext({
+      'should give a bundled link tag': function(include) {
+        var asFragment = include.group('stylesheets/all');
+        assert(/\/stylesheets\/bundled\/all.css\?\d+/.test(asFragment), 'missing all.css');
+        assert.equal(asFragment.match(/<link/g).length, 1);
+      }
+    }, 'css', true)
   },
   'scripts group': {
-    'in dev mode': includeContext({
-      'should give list of styles': function(include) {
+    'in plain (dev) mode': includeContext({
+      'should give a list of script tags': function(include) {
         var asFragment = include.group('javascripts/all');
         assert(/\/javascripts\/one.js\?\d+/.test(asFragment), 'missing one.js');
         assert(/\/javascripts\/two.js\?\d+/.test(asFragment), 'missing two.js');
@@ -64,8 +64,8 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert.equal(asFragment.match(/<script/g).length, 3);
       }
     }, 'js'),
-    'in prod mode': includeContext({
-      'should give list of styles': function(include) {
+    'in bundled (prod) mode': includeContext({
+      'should give a bundled script tag': function(include) {
         var asFragment = include.group('javascripts/all');
         assert(/\/javascripts\/bundled\/all.js\?\d+/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
@@ -74,4 +74,48 @@ exports.groupSuite = vows.describe('group').addBatch({
   }
 });
 
-
+exports.inlineSuite = vows.describe('inline').addBatch({
+  'inline stylesheets': {
+    'in plain (dev) mode as CSS': includeContext({
+      'should give list of link tags': function(include) {
+        var asFragment = include.inline('stylesheets/all');
+        assert(/\/stylesheets\/one.css\?\d+/.test(asFragment), 'missing one.css');
+        assert(/\/stylesheets\/two.css\?\d+/.test(asFragment), 'missing two.css');
+        assert(/\/stylesheets\/three.css\?\d+/.test(asFragment), 'missing three.css');
+        assert.equal(asFragment.match(/link/g).length, 3);
+      }
+    }, 'css'),
+    'in plain (dev) mode as LESS': includeContext({
+      'should give list of link tags': function(include) {
+        var asFragment = include.inline('stylesheets/all');
+        assert(/\/stylesheets\/one.less\?\d+/.test(asFragment), 'missing one.less');
+        assert(/\/stylesheets\/two.less\?\d+/.test(asFragment), 'missing two.less');
+        assert(/\/stylesheets\/three.less\?\d+/.test(asFragment), 'missing three.less');
+        assert.equal(asFragment.match(/<link/g).length, 3);
+      }
+    }, 'less'),
+    'in bundled (prod) mode as CSS': includeContext({
+      'should give list of link tags': function(include) {
+        var asFragment = include.inline('stylesheets/all');
+        assert.equal("<style type=\"text/css\">.one{}.two{}.three{}</style>", asFragment);
+      }
+    }, 'css', true)
+  },
+  'inline scripts': {
+    'in plain (dev) mode': includeContext({
+      'should give a list of script tags': function(include) {
+        var asFragment = include.inline('javascripts/all');
+        assert(/\/javascripts\/one.js\?\d+/.test(asFragment), 'missing one.js');
+        assert(/\/javascripts\/two.js\?\d+/.test(asFragment), 'missing two.js');
+        assert(/\/javascripts\/three.js\?\d+/.test(asFragment), 'missing three.js');
+        assert.equal(asFragment.match(/<script/g).length, 3);
+      }
+    }, 'js'),
+    'in bundled (prod) mode': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.inline('javascripts/all');
+        assert.equal("<script>123</script>", asFragment);
+      }
+    }, 'js', true)
+  }
+});
