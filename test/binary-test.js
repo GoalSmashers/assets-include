@@ -15,9 +15,15 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
       assert.equal(/usage:/.test(stdout), true);
     }
   }),
-  'help options': binaryContext('-h', {
+  'help option': binaryContext('-h', {
     'should output help': function(error, stdout) {
       assert.equal(/usage:/.test(stdout), true);
+    }
+  }),
+  'version option': binaryContext('-v', {
+    'should output version': function(error, stdout) {
+      var version = JSON.parse(require('fs').readFileSync('./package.json')).version;
+      assert.equal(stdout, version + "\n");
     }
   }),
   'plain scripts': binaryContext('-r ./data/public -c ./data/config.yml javascripts/all.js', {
@@ -34,7 +40,7 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   }),
   'bundled and inlined scripts': binaryContext('-b -i -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert.equal(stdout, "<script>123</script>");
+      assert.equal(stdout, "<script>123</script>\n");
     }
   })
 });
