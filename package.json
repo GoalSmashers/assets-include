@@ -2,7 +2,7 @@
   "author": "GoalSmashers.com <jakub@goalsmashers.com>",
   "name": "assets-include",
   "description": "Include assets into your views with ease (assets-packager compatible).",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "repository": {
     "url": ""
   },
