@@ -36,6 +36,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/\/stylesheets\/two.css\?\d+/.test(asFragment), 'missing two.css');
         assert(/\/stylesheets\/three.css\?\d+/.test(asFragment), 'missing three.css');
         assert.equal(asFragment.match(/link/g).length, 3);
+        assert.equal(asFragment.match(/rel="stylesheet"/g).length, 3);
       }
     }),
     'in plain (dev) mode as LESS': includeContext({
@@ -45,6 +46,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/\/stylesheets\/two.less\?\d+/.test(asFragment), 'missing two.less');
         assert(/\/stylesheets\/three.less\?\d+/.test(asFragment), 'missing three.less');
         assert.equal(asFragment.match(/<link/g).length, 3);
+        assert.equal(asFragment.match(/rel="stylesheet\/less"/g).length, 3);
       }
     }),
     'in bundled (prod) mode as CSS': includeContext({
