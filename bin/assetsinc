@@ -21,10 +21,13 @@ if (argv.v) {
 }
 
 if (argv.h || argv._.length == 0) {
-  util.puts("usage: assetsinc [-i] [-b] -c <config file> -r <assets root path> <group path, name, and type>");
+  util.puts("usage: assetsinc [-i] [-b] [-l] -c <config file> -r <assets root path> <group path, name, and type>");
   util.puts("e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js");
   process.exit(0);
 }
 
 var includer = new AssetsInclude(configFile, includerOptions);
-util.puts(includer[inline ? 'inline' : 'group'](locator));
+if (argv.l)
+  util.puts(includer.list(locator).join(','));
+else
+  util.puts(includer[inline ? 'inline' : 'group'](locator));
