@@ -83,6 +83,52 @@ exports.groupSuite = vows.describe('group').addBatch({
   }
 });
 
+exports.listSuite = vows.describe('list').addBatch({
+  'list of stylesheets': {
+    'in plain (dev) mode as CSS': includeContext({
+      'should give list of stylesheets': function(include) {
+        var list = include.list('stylesheets/all.css');
+        assert(/\/stylesheets\/one\.css\?\d+/.test(list[0]), 'missing one.css')
+        assert(/\/stylesheets\/two\.css\?\d+/.test(list[1]), 'missing two.css')
+        assert(/\/stylesheets\/three\.css\?\d+/.test(list[2]), 'missing three.css')
+      }
+    }),
+    'in plain (dev) mode as LESS': includeContext({
+      'should give list of stylesheets': function(include) {
+        var list = include.list('stylesheets/all.less');
+        assert.equal(list.length, 3);
+        assert(/\/stylesheets\/one\.less\?\d+/.test(list[0]), 'missing one.less')
+        assert(/\/stylesheets\/two\.less\?\d+/.test(list[1]), 'missing two.less')
+        assert(/\/stylesheets\/three\.less\?\d+/.test(list[2]), 'missing three.less')
+      }
+    }),
+    'in bundled (prod) mode as CSS': includeContext({
+      'should give one stylesheet': function(include) {
+        var list = include.list('stylesheets/all.css');
+        assert.equal(list.length, 1);
+        assert(/\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less')
+      }
+    }, { bundled: true })
+  },
+  'list of scripts': {
+    'in plain (dev) mode': includeContext({
+      'should give list of scripts': function(include) {
+        var list = include.list('javascripts/all.js');
+        assert(/\/javascripts\/one.js\?\d+/.test(list[0]), 'missing one.js')
+        assert(/\/javascripts\/two.js\?\d+/.test(list[1]), 'missing two.js')
+        assert(/\/javascripts\/three.js\?\d+/.test(list[2]), 'missing three.js')
+      }
+    }),
+    'in bundled (prod) mode': includeContext({
+      'should give one stylesheet': function(include) {
+        var list = include.list('javascripts/all.js');
+        assert.equal(list.length, 1);
+        assert(/\/javascripts\/bundled\/all.js\?\d+/.test(list[0]), 'missing all.js')
+      }
+    }, { bundled: true })
+  }
+});
+
 exports.inlineSuite = vows.describe('inline').addBatch({
   'inline stylesheets': {
     'in plain (dev) mode as CSS': includeContext({
