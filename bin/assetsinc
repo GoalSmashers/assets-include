@@ -28,6 +28,6 @@ if (argv.h || argv._.length == 0) {
 
 var includer = new AssetsInclude(configFile, includerOptions);
 if (argv.l)
-  util.puts(includer.list(locator).join(','));
+  util.print(includer.list(locator).join(','));
 else
   util.puts(includer[inline ? 'inline' : 'group'](locator));

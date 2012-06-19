@@ -45,7 +45,12 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   }),
   'plain lists': binaryContext('-l -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert(/\/javascripts\/one\.js\?\d+,\/javascripts\/two\.js\?\d+,\/javascripts\/three\.js\?\d+/.test(stdout))
+      assert(/^\/javascripts\/one\.js\?\d+,\/javascripts\/two\.js\?\d+,\/javascripts\/three\.js\?\d+$/.test(stdout))
+    }
+  }),
+  'bundled plain lists': binaryContext('-l -b -r ./data/public -c ./data/config.yml javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert(/^\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
     }
   })
 });
