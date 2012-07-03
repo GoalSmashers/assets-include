@@ -194,7 +194,13 @@ exports.inlineSuite = vows.describe('inline').addBatch({
         var asFragment = include.inline('stylesheets/all.css');
         assert.equal("<style type=\"text/css\">.one{}.two{}.three{}</style>", asFragment);
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled (prod) mode as CSS': includeContext({
+      'should give list of link tags': function(include) {
+        var asFragment = include.inline('stylesheets/all.css');
+        assert.equal("<style type=\"text/css\">.one{}.two{}.three{}-booster</style>", asFragment);
+      }
+    }, { bundled: true, cacheBoosters: true })
   },
   'inline scripts': {
     'in plain (dev) mode': includeContext({
@@ -211,6 +217,12 @@ exports.inlineSuite = vows.describe('inline').addBatch({
         var asFragment = include.inline('javascripts/all.js');
         assert.equal("<script>123</script>", asFragment);
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled (prod) mode': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.inline('javascripts/all.js');
+        assert.equal("<script>123-booster</script>", asFragment);
+      }
+    }, { bundled: true, cacheBoosters: true })
   }
 });

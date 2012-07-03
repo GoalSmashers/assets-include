@@ -58,5 +58,10 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
     'must give bundled script inclusion': function(error, stdout) {
       assert(/^\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
     }
+  }),
+  'inline with cache boosters': binaryContext('-i -b -s -r ./data/public -c ./data/config.yml javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert.equal("<script>123-booster</script>\n", stdout);
+    }
   })
 });
