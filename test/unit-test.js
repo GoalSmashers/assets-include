@@ -134,7 +134,14 @@ exports.listSuite = vows.describe('list').addBatch({
         assert.equal(list.length, 1);
         assert(/\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less')
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled (prod) mode as CSS with cache boosters': includeContext({
+      'should give one stylesheet': function(include) {
+        var list = include.list('stylesheets/all.css');
+        assert.equal(list.length, 1);
+        assert(/\/stylesheets\/bundled\/all-test2345678.css/.test(list[0]), 'missing all.less')
+      }
+    }, { bundled: true, cacheBoosters: true })
   },
   'list of scripts': {
     'in plain (dev) mode': includeContext({
@@ -151,7 +158,14 @@ exports.listSuite = vows.describe('list').addBatch({
         assert.equal(list.length, 1);
         assert(/\/javascripts\/bundled\/all.js\?\d+/.test(list[0]), 'missing all.js')
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled (prod) mode with cache boosters': includeContext({
+      'should give one stylesheet': function(include) {
+        var list = include.list('javascripts/all.js');
+        assert.equal(list.length, 1);
+        assert(/\/javascripts\/bundled\/all-test1234567.js/.test(list[0]), 'missing all.js')
+      }
+    }, { bundled: true, cacheBoosters: true })
   }
 });
 
