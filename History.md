@@ -1,3 +1,9 @@
+0.3.0 / 2012-07-03
+==================
+
+  * Added support for new cache boosters created by assets-packager 0.5+.
+  * Supports cache boosters via -s option from command line.
+
 0.2.1 / 2012-06-19
 ==================
 
