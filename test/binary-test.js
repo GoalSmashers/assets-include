@@ -38,6 +38,12 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
       assert.equal(stdout.match(/all\.js\?\d+/g).length, 1);
     }
   }),
+  'bundled scripts with cache boosters': binaryContext('-b -s -r ./data/public -c ./data/config.yml javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert.equal(stdout.match(/<script/g).length, 1);
+      assert.equal(stdout.match(/"\/javascripts\/bundled\/all-test1234567\.js"/g).length, 1);
+    }
+  }),
   'bundled and inlined scripts': binaryContext('-b -i -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
       assert.equal(stdout, "<script>123</script>\n");
