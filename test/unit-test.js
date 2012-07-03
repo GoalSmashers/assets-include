@@ -39,6 +39,16 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert.equal(asFragment.match(/rel="stylesheet"/g).length, 3);
       }
     }),
+    'in plain (dev) mode as CSS with cache boosters': includeContext({
+      'should give a list of link tags': function(include) {
+        var asFragment = include.group('stylesheets/all.css');
+        assert(/\/stylesheets\/one.css\?\d+/.test(asFragment), 'missing one.css');
+        assert(/\/stylesheets\/two.css\?\d+/.test(asFragment), 'missing two.css');
+        assert(/\/stylesheets\/three.css\?\d+/.test(asFragment), 'missing three.css');
+        assert.equal(asFragment.match(/link/g).length, 3);
+        assert.equal(asFragment.match(/rel="stylesheet"/g).length, 3);
+      }
+    }, { cacheBoosters: true }),
     'in plain (dev) mode as LESS': includeContext({
       'should give a list of link tags': function(include) {
         var asFragment = include.group('stylesheets/all.less');
@@ -55,7 +65,14 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/\/stylesheets\/bundled\/all.css\?\d+/.test(asFragment), 'missing all.css');
         assert.equal(asFragment.match(/<link/g).length, 1);
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled mode as CSS with cache boosters': includeContext({
+      'should give a bundled link tag with version id': function(include) {
+        var asFragment = include.group('stylesheets/all.css');
+        assert(/"\/stylesheets\/bundled\/all-test2345678.css"/.test(asFragment), 'missing all.css');
+        assert.equal(asFragment.match(/<link/g).length, 1);
+      }
+    }, { bundled: true, cacheBoosters: true })
   },
   'scripts group': {
     'in plain (dev) mode': includeContext({
@@ -73,7 +90,14 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/\/javascripts\/bundled\/all.js\?\d+/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
       }
-    }, { bundled: true })
+    }, { bundled: true }),
+    'in bundled (prod) mode with cache boosters': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.group('javascripts/all.js');
+        assert(/"\/javascripts\/bundled\/all-test1234567.js"/.test(asFragment), 'missing all.js');
+        assert.equal(asFragment.match(/<script/g).length, 1);
+      }
+    }, { bundled: true, cacheBoosters: true })
   },
   'custom': {
     'with absolute path': includeContext({
