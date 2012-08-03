@@ -1,3 +1,9 @@
+0.4.0 / 2012-08-03
+==================
+
+  * Fallback for path.existsSync in node 0.6.x.
+  * Restricting support to node >= 0.6.0.
+
 0.3.1 / 2012-07-04
 ==================
 
