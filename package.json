@@ -6,18 +6,17 @@
   "repository": {
     "url": ""
   },
-  "engines": {
-    "node": "~0.6"
-  },
   "bin": {
     "assetsinc": "./bin/assetsinc"
   },
   "dependencies": {
-    "assets-expander": "0.2.x",
+    "assets-expander": "0.3.x",
     "optimist": "0.3.x"
   },
   "devDependencies": {
     "vows": "*"
   },
-  "optionalDependencies": {}
+  "engines": {
+    "node": ">=0.6.0"
+  }
 }
