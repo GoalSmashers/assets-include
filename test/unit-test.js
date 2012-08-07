@@ -1,14 +1,15 @@
 var vows = require('vows'),
   assert = require('assert'),
+  path = require('path'),
   AssetsInclude = require('../index');
 
 var includeContext = function(definition, options) {
   definition.topic = function() {
     options = options || {};
     if (!options.root)
-      options.root = 'test/data/public';
+      options.root = path.join('test', 'data', 'public');
 
-    return new AssetsInclude('test/data/config.yml', options);
+    return new AssetsInclude(path.join('test', 'data', 'config.yml'), options);
   };
   return definition;
 };
@@ -105,7 +106,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('javascripts/all.js');
         assert.equal(asFragment.match(/<script/g).length, 3);
       }
-    }, { root: process.cwd() + '/test/data/public' })
+    }, { root: path.join(process.cwd(), 'test', 'data', 'public') })
   }
 });
 

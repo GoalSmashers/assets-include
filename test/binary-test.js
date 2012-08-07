@@ -2,9 +2,14 @@ var vows = require('vows'),
   assert = require('assert'),
   exec = require('child_process').exec;
 
+var isWindows = process.platform == 'win32';
+
 var binaryContext = function(options, context) {
   context.topic = function() {
-    exec("cd test; ../bin/assetsinc " + options, this.callback);
+    if (isWindows)
+      exec("cd test & node ..\\bin\\assetsinc " + options, this.callback);
+    else
+      exec("cd test; ../bin/assetsinc " + options, this.callback);
   };
   return context;
 };

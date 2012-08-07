@@ -18,13 +18,13 @@ var configFile = argv.c,
 if (argv.v) {
   var packageConfig = fs.readFileSync(path.join(path.dirname(fs.realpathSync(process.argv[1])), '../package.json'));
   util.puts(JSON.parse(packageConfig).version);
-  process.exit(0);
+  return 0;
 }
 
 if (argv.h || argv._.length == 0) {
   util.puts("usage: assetsinc [-i] [-b] [-l] [-s] -c <config file> -r <assets root path> <group path, name, and type>");
   util.puts("e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js");
-  process.exit(0);
+  return 0;
 }
 
 var includer = new AssetsInclude(configFile, includerOptions);

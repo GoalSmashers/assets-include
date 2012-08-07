@@ -10,7 +10,7 @@
     "assetsinc": "./bin/assetsinc"
   },
   "dependencies": {
-    "assets-expander": "0.3.x",
+    "assets-expander": "0.4.x",
     "optimist": "0.3.x"
   },
   "devDependencies": {
