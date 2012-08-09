@@ -274,6 +274,12 @@ exports.inlineSuite = vows.describe('inline').addBatch({
         var asFragment = include.inline('javascripts/all.js');
         assert.equal("<script>123</script>", asFragment);
       }
-    }, { bundled: true, assetHosts: 'goalsmashers.com' })
+    }, { bundled: true, assetHosts: 'goalsmashers.com' }),
+    'in bundled (prod) mode with cache boosters and asset hosts': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.inline('javascripts/all.js');
+        assert.equal("<script>123-booster</script>", asFragment);
+      }
+    }, { bundled: true, cacheBoosters: true, assetHosts: 'goalsmashers.com' })
   }
 });
