@@ -11,7 +11,8 @@ var configFile = argv.c,
   includerOptions = {
     bundled: argv.b,
     root: argv.r,
-    cacheBoosters: argv.s
+    cacheBoosters: argv.s,
+    assetHosts: argv.a
   },
   locator = argv._[0];
 
@@ -22,7 +23,7 @@ if (argv.v) {
 }
 
 if (argv.h || argv._.length == 0) {
-  util.puts("usage: assetsinc [-i] [-b] [-l] [-s] -c <config file> -r <assets root path> <group path, name, and type>");
+  util.puts("usage: assetsinc [-i] [-b] [-l] [-s] [-a] <asset hosts> -c <config file> -r <assets root path> <group path, name, and type>");
   util.puts("e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js");
   return 0;
 }

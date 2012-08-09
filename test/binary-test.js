@@ -43,6 +43,12 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
       assert.equal(stdout.match(/all\.js\?\d+/g).length, 1);
     }
   }),
+  'bundled scripts with asset hosts': binaryContext('-b -a assets[0,1].goalsmashers.com -r ./data/public -c ./data/config.yml javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert.equal(stdout.match(/<script/g).length, 1);
+      assert.equal(stdout.match(/\/\/assets0.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+/g).length, 1);
+    }
+  }),
   'bundled scripts with cache boosters': binaryContext('-b -s -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
       assert.equal(stdout.match(/<script/g).length, 1);
@@ -62,6 +68,11 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   'bundled plain lists': binaryContext('-l -b -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
       assert(/^\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
+    }
+  }),
+  'bundled plain lists with asset hosts': binaryContext('-l -b -a assets[3,2,1].goalsmashers.com -r ./data/public -c ./data/config.yml javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert(/^\/\/assets3.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
     }
   }),
   'inline with cache boosters': binaryContext('-i -b -s -r ./data/public -c ./data/config.yml javascripts/all.js', {
