@@ -1,3 +1,8 @@
+0.6.0 / 2012-08-09
+==================
+
+  * Added support for asset hosts (-a ... or assetHosts via API).
+
 0.5.0 / 2012-08-07
 ==================
 
