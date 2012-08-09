@@ -1,3 +1,8 @@
+0.6.1 / 2012-08-09
+==================
+
+  * Fixed getting inline assets with cache boosters and asset hosts.
+
 0.6.0 / 2012-08-09
 ==================
 
