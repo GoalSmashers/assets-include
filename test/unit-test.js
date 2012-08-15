@@ -75,6 +75,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('stylesheets/all.css');
         assert(/\/stylesheets\/bundled\/all.css\?\d+/.test(asFragment), 'missing all.css');
         assert.equal(asFragment.match(/<link/g).length, 1);
+        assert.equal(asFragment.match(/ crossorigin/g), null);
       }
     }, { bundled: true }),
     'in bundled mode as CSS with cache boosters': includeContext({
@@ -82,6 +83,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('stylesheets/all.css');
         assert(/"\/stylesheets\/bundled\/all-test2345678.css"/.test(asFragment), 'missing all.css');
         assert.equal(asFragment.match(/<link/g).length, 1);
+        assert.equal(asFragment.match(/ crossorigin/g), null);
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled mode as CSS with assets hosts': includeContext({
@@ -89,6 +91,10 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('stylesheets/all.css');
         assert(/"\/\/assets0.goalsmashers.com\/stylesheets\/bundled\/all\.css\?\d+"/.test(asFragment), 'missing all.css');
         assert.equal(asFragment.match(/<link/g).length, 1);
+        assert.equal(asFragment.match(/ href=/g).length, 1);
+        assert.equal(asFragment.match(/ media=/g).length, 1);
+        assert.equal(asFragment.match(/ rel=/g).length, 1);
+        assert.equal(asFragment.match(/ crossorigin/g).length, 1);
       }
     }, { bundled: true, assetHosts: "assets[0,1].goalsmashers.com" })
   },
@@ -114,6 +120,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('javascripts/all.js');
         assert(/"\/javascripts\/bundled\/all\-test1234567\.js"/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
+        assert.equal(asFragment.match(/ crossorigin/g), null);
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode with assets hosts': includeContext({
@@ -121,6 +128,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('javascripts/all.js');
         assert(/"\/\/assets0.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+"/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
+        assert.equal(asFragment.match(/ crossorigin/g).length, 1);
       }
     }, { bundled: true, assetHosts: 'assets0.goalsmashers.com' })
   },
