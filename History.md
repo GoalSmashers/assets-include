@@ -1,3 +1,8 @@
+0.6.2 / 2012-08-15
+==================
+
+  * Added crossorigin attribute to link/script when using asset hosts.
+
 0.6.1 / 2012-08-09
 ==================
 
