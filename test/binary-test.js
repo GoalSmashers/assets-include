@@ -40,6 +40,14 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   'bundled scripts': binaryContext('-b -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
       assert.equal(stdout.match(/<script/g).length, 1);
+      assert.equal(stdout.match(/ (async|defer)>/g), null);
+      assert.equal(stdout.match(/all\.js\?\d+/g).length, 1);
+    }
+  }),
+  'bundled scripts with loading mode': binaryContext('-b -r ./data/public -c ./data/config.yml -m async javascripts/all.js', {
+    'must give bundled script inclusion': function(error, stdout) {
+      assert.equal(stdout.match(/<script/g).length, 1);
+      assert.equal(stdout.match(/ async>/g).length, 1);
       assert.equal(stdout.match(/all\.js\?\d+/g).length, 1);
     }
   }),

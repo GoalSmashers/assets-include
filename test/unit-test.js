@@ -105,14 +105,38 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/\/javascripts\/one.js\?\d+/.test(asFragment), 'missing one.js');
         assert(/\/javascripts\/two.js\?\d+/.test(asFragment), 'missing two.js');
         assert(/\/javascripts\/three.js\?\d+/.test(asFragment), 'missing three.js');
+        assert.equal(asFragment.match(/ (async|defer)>/g), null);
         assert.equal(asFragment.match(/<script/g).length, 3);
       }
     }),
+    'in plain (dev) mode with deferred loading': includeContext({
+      'should give a list of script tags': function(include) {
+        var asFragment = include.group('javascripts/all.js');
+        assert(/\/javascripts\/one.js\?\d+/.test(asFragment), 'missing one.js');
+        assert(/\/javascripts\/two.js\?\d+/.test(asFragment), 'missing two.js');
+        assert(/\/javascripts\/three.js\?\d+/.test(asFragment), 'missing three.js');
+        assert.equal(asFragment.match(/<script/g).length, 3);
+        assert.equal(asFragment.match(/ async>/g), null);
+        assert.equal(asFragment.match(/ defer>/g).length, 3);
+      }
+    }, { loadingMode: 'defer' }),
+    'in plain (dev) mode with async loading': includeContext({
+      'should give a list of script tags': function(include) {
+        var asFragment = include.group('javascripts/all.js');
+        assert(/\/javascripts\/one.js\?\d+/.test(asFragment), 'missing one.js');
+        assert(/\/javascripts\/two.js\?\d+/.test(asFragment), 'missing two.js');
+        assert(/\/javascripts\/three.js\?\d+/.test(asFragment), 'missing three.js');
+        assert.equal(asFragment.match(/<script/g).length, 3);
+        assert.equal(asFragment.match(/ async>/g).length, 3);
+        assert.equal(asFragment.match(/ defer>/g), null);
+      }
+    }, { loadingMode: 'async' }),
     'in bundled (prod) mode': includeContext({
       'should give a bundled script tag': function(include) {
         var asFragment = include.group('javascripts/all.js');
         assert(/\/javascripts\/bundled\/all\.js\?\d+/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
+        assert.equal(asFragment.match(/ (async|defer)>/g), null);
       }
     }, { bundled: true }),
     'in bundled (prod) mode with cache boosters': includeContext({
@@ -120,7 +144,8 @@ exports.groupSuite = vows.describe('group').addBatch({
         var asFragment = include.group('javascripts/all.js');
         assert(/"\/javascripts\/bundled\/all\-test1234567\.js"/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
-        assert.equal(asFragment.match(/ crossorigin/g), null);
+        assert.equal(asFragment.match(/ crossorigin /g), null);
+        assert.equal(asFragment.match(/ (async|defer)>/g), null);
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode with assets hosts': includeContext({
@@ -129,8 +154,27 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert(/"\/\/assets0.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+"/.test(asFragment), 'missing all.js');
         assert.equal(asFragment.match(/<script/g).length, 1);
         assert.equal(asFragment.match(/ crossorigin/g).length, 1);
+        assert.equal(asFragment.match(/ (async|defer)>/g), null);
       }
-    }, { bundled: true, assetHosts: 'assets0.goalsmashers.com' })
+    }, { bundled: true, assetHosts: 'assets0.goalsmashers.com' }),
+    'in bundled (prod) mode with deferred loading': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.group('javascripts/all.js');
+        assert(/\/javascripts\/bundled\/all\.js\?\d+/.test(asFragment), 'missing all.js');
+        assert.equal(asFragment.match(/<script/g).length, 1);
+        assert.equal(asFragment.match(/ async>/g), null);
+        assert.equal(asFragment.match(/ defer>/g).length, 1);
+      }
+    }, { bundled: true, loadingMode: 'defer' }),
+    'in bundled (prod) mode with async loading': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.group('javascripts/all.js');
+        assert(/\/javascripts\/bundled\/all\.js\?\d+/.test(asFragment), 'missing all.js');
+        assert.equal(asFragment.match(/<script/g).length, 1);
+        assert.equal(asFragment.match(/ async>/g).length, 1);
+        assert.equal(asFragment.match(/ defer>/g), null);
+      }
+    }, { bundled: true, loadingMode: 'async' })
   },
   'custom': {
     'with absolute path': includeContext({
