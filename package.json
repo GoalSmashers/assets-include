@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "assets-expander": "1.0.x",
-    "optimist": "0.3.x"
+    "commander": "2.1.x"
   },
   "devDependencies": {
     "jshint": "2.4.x",

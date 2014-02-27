@@ -1,36 +1,45 @@
 #!/usr/bin/env node
 
-var argv = require('optimist').argv;
 var fs = require('fs');
 var path = require('path');
 var util = require('util');
 var AssetsInclude = require('../index');
 
-var configFile = argv.c;
-var inline = argv.i;
-var includerOptions = {
-  bundled: argv.b,
-  root: argv.r,
-  cacheBoosters: argv.s,
-  assetHosts: argv.a,
-  loadingMode: argv.m
+var commands = require('commander');
+
+var packageConfig = fs.readFileSync(path.join(path.dirname(fs.realpathSync(process.argv[1])), '../package.json'));
+var buildVersion = JSON.parse(packageConfig).version;
+
+commands
+  .version(buildVersion, '-v, --version')
+  .usage('<options> <group path, name, and type>')
+  .option('-a, --asset-hosts [asset-hosts]', 'prefix all paths with given asset host(s)')
+  .option('-b, --bundled', 'output a bundled (production) version')
+  .option('-s, --cache-boosters', 'use cache boosters')
+  .option('-c, --config [config-file]', 'path to assets config file')
+  .option('-i, --inline', 'output inline tags')
+  .option('-m, --loading-mode [async|defer]', 'use the given loading mode for JavaScript assets')
+  .option('-l, --list', 'list mode (prints filenames instead of HTML tags)')
+  .option('-r, --root [root-path]', 'root path of all assets (e.g. ./public)');
+
+commands.parse(process.argv);
+
+if (commands.args.length === 0) {
+  commands.outputHelp();
+  return 0;
+}
+
+var locator = commands.args && commands.args[0];
+var options = {
+  bundled: commands.bundled,
+  root: commands.root,
+  cacheBoosters: commands.cacheBoosters,
+  assetHosts: commands.assetHosts,
+  loadingMode: commands.loadingMode
 };
-var locator = argv._[0];
 
-if (argv.v) {
-  var packageConfig = fs.readFileSync(path.join(path.dirname(fs.realpathSync(process.argv[1])), '../package.json'));
-  util.puts(JSON.parse(packageConfig).version);
-  return 0;
-}
-
-if (argv.h || argv._.length === 0) {
-  util.puts('usage: assetsinc [-i] [-b] [-l] [-s] [-m] <loading mode> [-a] <asset hosts> -c <config file> -r <assets root path> <group path, name, and type>');
-  util.puts('e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js');
-  return 0;
-}
-
-var includer = new AssetsInclude(configFile, includerOptions);
-if (argv.l)
+var includer = new AssetsInclude(commands.config, options);
+if (commands.list)
   util.print(includer.list(locator).join(','));
 else
-  util.puts(includer[inline ? 'inline' : 'group'](locator));
+  util.puts(includer[commands.inline ? 'inline' : 'group'](locator));
