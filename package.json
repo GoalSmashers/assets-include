@@ -1,14 +1,28 @@
 {
-  "author": "GoalSmashers.com <jakub@goalsmashers.com>",
   "name": "assets-include",
-  "description": "Include assets into your views with ease (assets-packager compatible).",
   "version": "0.7.0",
+  "author": "GoalSmashers.com <jakub@goalsmashers.com>",
+  "description": "Include assets into your views with ease (assets-packager compatible).",
+  "license": "MIT",
+  "homepage": "https://github.com/GoalSmashers/assets-include",
   "repository": {
-    "url": ""
+    "type": "git",
+    "url": "https://github.com/GoalSmashers/assets-include.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GoalSmashers/assets-include/issues"
   },
   "bin": {
     "assetsinc": "./bin/assetsinc"
   },
+  "main": "index.js",
+  "files": [
+    "bin",
+    "lib",
+    "History.md",
+    "index.js",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "vows"
   },
@@ -17,7 +31,7 @@
     "optimist": "0.3.x"
   },
   "devDependencies": {
-    "vows": "*"
+    "vows": "0.7.x"
   },
   "engines": {
     "node": ">=0.6.0"
