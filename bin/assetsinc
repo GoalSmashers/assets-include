@@ -23,9 +23,9 @@ if (argv.v) {
   return 0;
 }
 
-if (argv.h || argv._.length == 0) {
-  util.puts("usage: assetsinc [-i] [-b] [-l] [-s] [-m] <loading mode> [-a] <asset hosts> -c <config file> -r <assets root path> <group path, name, and type>");
-  util.puts("e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js");
+if (argv.h || argv._.length === 0) {
+  util.puts('usage: assetsinc [-i] [-b] [-l] [-s] [-m] <loading mode> [-a] <asset hosts> -c <config file> -r <assets root path> <group path, name, and type>');
+  util.puts('e.g.: assetsinc -b -c /apps/example.com/current/config/assets.yml -r /apps/example.com/current/public javascripts/all.js');
   return 0;
 }
 

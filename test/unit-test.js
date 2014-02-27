@@ -96,7 +96,7 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert.equal(asFragment.match(/ rel=/g).length, 1);
         assert.equal(asFragment.match(/ crossorigin/g).length, 1);
       }
-    }, { bundled: true, assetHosts: "assets[0,1].goalsmashers.com" })
+    }, { bundled: true, assetHosts: 'assets[0,1].goalsmashers.com' })
   },
   'scripts group': {
     'in plain (dev) mode': includeContext({
@@ -191,39 +191,39 @@ exports.listSuite = vows.describe('list').addBatch({
     'in plain (dev) mode as CSS': includeContext({
       'should give list of stylesheets': function(include) {
         var list = include.list('stylesheets/all.css');
-        assert(/\/stylesheets\/one\.css\?\d+/.test(list[0]), 'missing one.css')
-        assert(/\/stylesheets\/two\.css\?\d+/.test(list[1]), 'missing two.css')
-        assert(/\/stylesheets\/three\.css\?\d+/.test(list[2]), 'missing three.css')
+        assert(/\/stylesheets\/one\.css\?\d+/.test(list[0]), 'missing one.css');
+        assert(/\/stylesheets\/two\.css\?\d+/.test(list[1]), 'missing two.css');
+        assert(/\/stylesheets\/three\.css\?\d+/.test(list[2]), 'missing three.css');
       }
     }),
     'in plain (dev) mode as LESS': includeContext({
       'should give list of stylesheets': function(include) {
         var list = include.list('stylesheets/all.less');
         assert.equal(list.length, 3);
-        assert(/\/stylesheets\/one\.less\?\d+/.test(list[0]), 'missing one.less')
-        assert(/\/stylesheets\/two\.less\?\d+/.test(list[1]), 'missing two.less')
-        assert(/\/stylesheets\/three\.less\?\d+/.test(list[2]), 'missing three.less')
+        assert(/\/stylesheets\/one\.less\?\d+/.test(list[0]), 'missing one.less');
+        assert(/\/stylesheets\/two\.less\?\d+/.test(list[1]), 'missing two.less');
+        assert(/\/stylesheets\/three\.less\?\d+/.test(list[2]), 'missing three.less');
       }
     }),
     'in bundled (prod) mode as CSS': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('stylesheets/all.css');
         assert.equal(list.length, 1);
-        assert(/\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less')
+        assert(/\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less');
       }
     }, { bundled: true }),
     'in bundled (prod) mode as CSS with cache boosters': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('stylesheets/all.css');
         assert.equal(list.length, 1);
-        assert(/\/stylesheets\/bundled\/all-test2345678.css/.test(list[0]), 'missing all.less')
+        assert(/\/stylesheets\/bundled\/all-test2345678.css/.test(list[0]), 'missing all.less');
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode as CSS with assets hosts': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('stylesheets/all.css');
         assert.equal(list.length, 1);
-        assert(/\/\/na.test.com\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less')
+        assert(/\/\/na.test.com\/stylesheets\/bundled\/all\.css\?\d+/.test(list[0]), 'missing all.less');
       }
     }, { bundled: true, assetHosts: 'n[a,b].test.com' })
   },
@@ -231,30 +231,30 @@ exports.listSuite = vows.describe('list').addBatch({
     'in plain (dev) mode': includeContext({
       'should give list of scripts': function(include) {
         var list = include.list('javascripts/all.js');
-        assert(/\/javascripts\/one.js\?\d+/.test(list[0]), 'missing one.js')
-        assert(/\/javascripts\/two.js\?\d+/.test(list[1]), 'missing two.js')
-        assert(/\/javascripts\/three.js\?\d+/.test(list[2]), 'missing three.js')
+        assert(/\/javascripts\/one.js\?\d+/.test(list[0]), 'missing one.js');
+        assert(/\/javascripts\/two.js\?\d+/.test(list[1]), 'missing two.js');
+        assert(/\/javascripts\/three.js\?\d+/.test(list[2]), 'missing three.js');
       }
     }),
     'in bundled (prod) mode': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('javascripts/all.js');
         assert.equal(list.length, 1);
-        assert(/\/javascripts\/bundled\/all.js\?\d+/.test(list[0]), 'missing all.js')
+        assert(/\/javascripts\/bundled\/all.js\?\d+/.test(list[0]), 'missing all.js');
       }
     }, { bundled: true }),
     'in bundled (prod) mode with cache boosters': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('javascripts/all.js');
         assert.equal(list.length, 1);
-        assert(/\/javascripts\/bundled\/all-test1234567.js/.test(list[0]), 'missing all.js')
+        assert(/\/javascripts\/bundled\/all-test1234567.js/.test(list[0]), 'missing all.js');
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode with assets hosts': includeContext({
       'should give one stylesheet': function(include) {
         var list = include.list('javascripts/all.js');
         assert.equal(list.length, 1);
-        assert(/\/\/goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+/.test(list[0]), 'missing all.js')
+        assert(/\/\/goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+/.test(list[0]), 'missing all.js');
       }
     }, { bundled: true, assetHosts: 'goalsmashers.com' })
   }
@@ -283,19 +283,19 @@ exports.inlineSuite = vows.describe('inline').addBatch({
     'in bundled (prod) mode as CSS': includeContext({
       'should give list of link tags': function(include) {
         var asFragment = include.inline('stylesheets/all.css');
-        assert.equal("<style type=\"text/css\">.one{}.two{}.three{}</style>", asFragment);
+        assert.equal('<style type="text/css">.one{}.two{}.three{}</style>', asFragment);
       }
     }, { bundled: true }),
     'in bundled (prod) mode as CSS with cache boosters': includeContext({
       'should give list of link tags': function(include) {
         var asFragment = include.inline('stylesheets/all.css');
-        assert.equal("<style type=\"text/css\">.one{}.two{}.three{}-booster</style>", asFragment);
+        assert.equal('<style type="text/css">.one{}.two{}.three{}-booster</style>', asFragment);
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode as CSS with asset hosts': includeContext({
       'should give list of link tags': function(include) {
         var asFragment = include.inline('stylesheets/all.css');
-        assert.equal("<style type=\"text/css\">.one{}.two{}.three{}</style>", asFragment);
+        assert.equal('<style type="text/css">.one{}.two{}.three{}</style>', asFragment);
       }
     }, { bundled: true, assetHosts: '[0,1].goalsmashers.com' })
   },
@@ -312,25 +312,25 @@ exports.inlineSuite = vows.describe('inline').addBatch({
     'in bundled (prod) mode': includeContext({
       'should give a bundled script tag': function(include) {
         var asFragment = include.inline('javascripts/all.js');
-        assert.equal("<script>123</script>", asFragment);
+        assert.equal('<script>123</script>', asFragment);
       }
     }, { bundled: true }),
     'in bundled (prod) mode with cache boosters': includeContext({
       'should give a bundled script tag': function(include) {
         var asFragment = include.inline('javascripts/all.js');
-        assert.equal("<script>123-booster</script>", asFragment);
+        assert.equal('<script>123-booster</script>', asFragment);
       }
     }, { bundled: true, cacheBoosters: true }),
     'in bundled (prod) mode with asset hosts': includeContext({
       'should give a bundled script tag': function(include) {
         var asFragment = include.inline('javascripts/all.js');
-        assert.equal("<script>123</script>", asFragment);
+        assert.equal('<script>123</script>', asFragment);
       }
     }, { bundled: true, assetHosts: 'goalsmashers.com' }),
     'in bundled (prod) mode with cache boosters and asset hosts': includeContext({
       'should give a bundled script tag': function(include) {
         var asFragment = include.inline('javascripts/all.js');
-        assert.equal("<script>123-booster</script>", asFragment);
+        assert.equal('<script>123-booster</script>', asFragment);
       }
     }, { bundled: true, cacheBoosters: true, assetHosts: 'goalsmashers.com' })
   }

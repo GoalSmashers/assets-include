@@ -24,6 +24,8 @@
     "LICENSE"
   ],
   "scripts": {
+    "check": "jshint ./bin/assetsinc .",
+    "prepublish": "jshint ./bin/assetsinc .",
     "test": "vows"
   },
   "dependencies": {
@@ -31,6 +33,7 @@
     "optimist": "0.3.x"
   },
   "devDependencies": {
+    "jshint": "2.4.x",
     "vows": "0.7.x"
   },
   "engines": {

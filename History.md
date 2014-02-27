@@ -1,3 +1,8 @@
+1.0.0 / 2014-xx-xx
+==================
+
+  * Adds JSHint linter and fixes all warnings.
+
 0.7.0 / 2013-08-12
 ==================
 

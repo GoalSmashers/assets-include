@@ -7,9 +7,9 @@ var isWindows = process.platform == 'win32';
 var binaryContext = function(options, context) {
   context.topic = function() {
     if (isWindows)
-      exec("cd test & node ..\\bin\\assetsinc " + options, this.callback);
+      exec('cd test & node ..\\bin\\assetsinc ' + options, this.callback);
     else
-      exec("cd test; ../bin/assetsinc " + options, this.callback);
+      exec('cd test; ../bin/assetsinc ' + options, this.callback);
   };
   return context;
 };
@@ -28,7 +28,7 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   'version option': binaryContext('-v', {
     'should output version': function(error, stdout) {
       var version = JSON.parse(require('fs').readFileSync('./package.json')).version;
-      assert.equal(stdout, version + "\n");
+      assert.equal(stdout, version + '\n');
     }
   }),
   'plain scripts': binaryContext('-r ./data/public -c ./data/config.yml javascripts/all.js', {
@@ -65,27 +65,27 @@ exports.commandsSuite = vows.describe('binary commands').addBatch({
   }),
   'bundled and inlined scripts': binaryContext('-b -i -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert.equal(stdout, "<script>123</script>\n");
+      assert.equal(stdout, '<script>123</script>\n');
     }
   }),
   'plain lists': binaryContext('-l -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert(/^\/javascripts\/one\.js\?\d+,\/javascripts\/two\.js\?\d+,\/javascripts\/three\.js\?\d+$/.test(stdout))
+      assert(/^\/javascripts\/one\.js\?\d+,\/javascripts\/two\.js\?\d+,\/javascripts\/three\.js\?\d+$/.test(stdout));
     }
   }),
   'bundled plain lists': binaryContext('-l -b -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert(/^\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
+      assert(/^\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout));
     }
   }),
   'bundled plain lists with asset hosts': binaryContext('-l -b -a assets[3,2,1].goalsmashers.com -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert(/^\/\/assets3.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout))
+      assert(/^\/\/assets3.goalsmashers.com\/javascripts\/bundled\/all\.js\?\d+$/.test(stdout));
     }
   }),
   'inline with cache boosters': binaryContext('-i -b -s -r ./data/public -c ./data/config.yml javascripts/all.js', {
     'must give bundled script inclusion': function(error, stdout) {
-      assert.equal("<script>123-booster</script>\n", stdout);
+      assert.equal('<script>123-booster</script>\n', stdout);
     }
   })
 });

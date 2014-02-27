@@ -1,1 +1,1 @@
-module.exports = require("./lib/include");
+module.exports = require('./lib/include');
