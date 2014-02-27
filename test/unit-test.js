@@ -1,7 +1,7 @@
-var vows = require('vows'),
-  assert = require('assert'),
-  path = require('path'),
-  AssetsInclude = require('../index');
+var vows = require('vows');
+var assert = require('assert');
+var path = require('path');
+var AssetsInclude = require('../index');
 
 var includeContext = function(definition, options) {
   definition.topic = function() {

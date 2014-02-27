@@ -1,6 +1,6 @@
-var vows = require('vows'),
-  assert = require('assert'),
-  exec = require('child_process').exec;
+var vows = require('vows');
+var assert = require('assert');
+var exec = require('child_process').exec;
 
 var isWindows = process.platform == 'win32';
 

@@ -1,21 +1,21 @@
 #!/usr/bin/env node
 
-var argv = require('optimist').argv,
-  fs = require('fs'),
-  path = require('path'),
-  util = require('util'),
-  AssetsInclude = require('../index');
+var argv = require('optimist').argv;
+var fs = require('fs');
+var path = require('path');
+var util = require('util');
+var AssetsInclude = require('../index');
 
-var configFile = argv.c,
-  inline = argv.i,
-  includerOptions = {
-    bundled: argv.b,
-    root: argv.r,
-    cacheBoosters: argv.s,
-    assetHosts: argv.a,
-    loadingMode: argv.m
-  },
-  locator = argv._[0];
+var configFile = argv.c;
+var inline = argv.i;
+var includerOptions = {
+  bundled: argv.b,
+  root: argv.r,
+  cacheBoosters: argv.s,
+  assetHosts: argv.a,
+  loadingMode: argv.m
+};
+var locator = argv._[0];
 
 if (argv.v) {
   var packageConfig = fs.readFileSync(path.join(path.dirname(fs.realpathSync(process.argv[1])), '../package.json'));
