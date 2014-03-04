@@ -2,6 +2,7 @@
 ==================
 
 * Adds JSHint linter and fixes all warnings.
+* Adds project's Readme with CLI / lib documentation.
 * Removes optimist in favor to commander for CLI options parsing.
 * Updates assets-expander dependency to 1.0.x.
 
