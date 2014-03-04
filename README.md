@@ -1,4 +1,5 @@
 [![NPM version](https://badge.fury.io/js/assets-include.png)](https://badge.fury.io/js/assets-include)
+[![Build Status](https://secure.travis-ci.org/GoalSmashers/assets-include.png)](https://travis-ci.org/GoalSmashers/assets-include)
 [![Dependency Status](https://david-dm.org/GoalSmashers/assets-include.png?theme=shields.io)](https://david-dm.org/GoalSmashers/assets-include)
 [![devDependency Status](https://david-dm.org/GoalSmashers/assets-include/dev-status.png?theme=shields.io)](https://david-dm.org/GoalSmashers/assets-include#info=devDependencies)
 
