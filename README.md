@@ -10,6 +10,8 @@ Assets-include is a [Node.js](http://nodejs.org/) tool for including your assets
 This project is closely tied to [Assets-Packager](https://github.com/GoalSmashers/assets-packager) which can
 minify, enhance, and bundle your assets based on a YAML definition file.
 
+See [example apps](https://github.com/GoalSmashers/assets-include/tree/master/examples) for real-world use cases.
+
 ## Usage
 
 ### What are the requirements?

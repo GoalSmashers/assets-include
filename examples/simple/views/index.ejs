@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%- assets.group('stylesheets/public.css') %>
+  </head>
+  <body class="home">
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+  </body>
+  <%- assets.inline('javascripts/public.js') %>
+</html>

@@ -1,0 +1,8 @@
+javascripts:
+  public:
+    - main
+stylesheets:
+  public:
+    - normalize
+    - base
+    - pages
