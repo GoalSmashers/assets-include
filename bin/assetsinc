@@ -20,7 +20,7 @@ commands
   .option('-i, --inline', 'output inline tags')
   .option('-m, --loading-mode [async|defer]', 'use the given loading mode for JavaScript assets')
   .option('-l, --list', 'list mode (prints filenames instead of HTML tags)')
-  .option('-r, --root [root-path]', 'root path of all assets (e.g. ./public)');
+  .option('-r, --root [root-path]', 'root path of all assets (defaults to ./public under config\'s path)');
 
 commands.parse(process.argv);
 

@@ -34,7 +34,7 @@ includer.group('stylesheets/mobile/application.css');
 AssetsInclude constructor accepts a hash as a 2nd parameter, i.e.,
 
 * `bundled` - `true` for bundled, production mode, `false` for development mode
-* `root` - root path to all your assets, e.g. `./public`
+* `root` - root path of all assets, defaults to ./public under config's path
 * `cacheBoosters` - `true` for cache boosters (timestamp in dev mode, md5 for bundled, production files)
 * `assetHosts` - prefixes all paths with given asset host(s)
 * `loadingMode` - `async` or `defer` for JavaScript assets' loading mode
@@ -62,7 +62,7 @@ assetsinc <options> <group path, name, and type>
 -i, --inline                      output inline tags
 -m, --loading-mode [async|defer]  use the given loading mode for JavaScript assets
 -l, --list                        list mode (prints filenames instead of HTML tags)
--r, --root [root-path]            root path of all assets (e.g. ./public)
+-r, --root [root-path]            root path of all assets (defaults to ./public under config's path)
 ```
 
 ### What are the assets-include dev commands?

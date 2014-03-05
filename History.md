@@ -4,6 +4,7 @@
 * Adds JSHint linter and fixes all warnings.
 * Adds project's Readme with CLI / lib documentation.
 * Adds TravisCI configuration.
+* Defaults `root` option to `./public` under config's dir.
 * Drops compatibility with node.js 0.6.
 * Removes optimist in favor to commander for CLI options parsing.
 * Updates assets-expander dependency to 1.0.x.
