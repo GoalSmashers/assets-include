@@ -1,6 +1,6 @@
 {
   "name": "assets-include",
-  "version": "0.7.0",
+  "version": "1.0.0",
   "author": "GoalSmashers.com <jakub@goalsmashers.com>",
   "description": "Include assets into your views with ease (assets-packager compatible).",
   "license": "MIT",

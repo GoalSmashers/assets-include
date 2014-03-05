@@ -1,4 +1,4 @@
-1.0.0 / 2014-xx-xx
+[1.0.0 / 2014-03-05](https://github.com/GoalSmashers/assets-include/compare/v0.7.0...v1.0.0)
 ==================
 
 * Adds JSHint linter and fixes all warnings.
