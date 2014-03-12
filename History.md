@@ -1,3 +1,8 @@
+[1.1.0 / 2014-xx-xx (UNRELEASED)](https://github.com/GoalSmashers/assets-include/compare/v1.0.0...v1.1.0)
+==================
+
+* Fixed issue [#1](https://github.com/GoalSmashers/assets-include/issues/1) - allow `group` to override `loadingMode` option.
+
 [1.0.0 / 2014-03-05](https://github.com/GoalSmashers/assets-include/compare/v0.7.0...v1.0.0)
 ==================
 

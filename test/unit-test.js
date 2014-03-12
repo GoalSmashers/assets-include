@@ -170,6 +170,17 @@ exports.groupSuite = vows.describe('group').addBatch({
         assert.equal(asFragment.match(/ async>/g).length, 1);
         assert.equal(asFragment.match(/ defer>/g), null);
       }
+    }, { bundled: true, loadingMode: 'async' }),
+    'in bundled (prod) mode with overriden loading': includeContext({
+      'should give a bundled script tag': function(include) {
+        var asFragment = include.group('javascripts/all.js', { loadingMode: 'defer' });
+        assert.equal(asFragment.match(/ async>/g), null);
+        assert.equal(asFragment.match(/ defer>/g).length, 1);
+
+        asFragment = include.group('javascripts/all.js');
+        assert.equal(asFragment.match(/ async>/g).length, 1);
+        assert.equal(asFragment.match(/ defer>/g), null);
+      }
     }, { bundled: true, loadingMode: 'async' })
   },
   'custom': {
