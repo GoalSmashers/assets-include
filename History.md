@@ -1,4 +1,4 @@
-[1.1.1 / 2014-xx-xx (UNRELEASED)](https://github.com/GoalSmashers/assets-include/compare/v1.1.0...v1.1.1)
+[1.1.1 / 2014-03-15](https://github.com/GoalSmashers/assets-include/compare/v1.1.0...v1.1.1)
 ==================
 
 * Fixed issue [#2](https://github.com/GoalSmashers/assets-include/issues/2) - allows `config` to be an absolute path.
